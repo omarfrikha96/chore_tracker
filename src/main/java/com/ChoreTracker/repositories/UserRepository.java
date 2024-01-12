@@ -1,4 +1,4 @@
-package com.chore_tracker.repositories;
+package com.ChoreTracker.repositories;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.chore_tracker.models.User;
+import com.ChoreTracker.models.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {

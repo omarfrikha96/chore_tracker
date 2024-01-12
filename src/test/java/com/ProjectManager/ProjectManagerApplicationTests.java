@@ -1,10 +1,10 @@
-package com.chore_tracker;
+package com.ProjectManager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChoreTrackerApplicationTests {
+class ProjectManagerApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,4 +1,4 @@
-package com.chore_tracker.controllers;
+package com.ChoreTracker.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.chore_tracker.models.LoginUser;
-import com.chore_tracker.models.User;
-import com.chore_tracker.services.UserService;
+import com.ChoreTracker.models.LoginUser;
+import com.ChoreTracker.models.User;
+import com.ChoreTracker.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -21,7 +21,6 @@ public class LoginController {
 	 @Autowired
 	 private UserService userService;
 	 
-
 		@GetMapping("/")
 		public String index(Model model) {
 		    model.addAttribute("newUser", new User());
@@ -69,7 +68,8 @@ public class LoginController {
 			Long userId = (Long) session.getAttribute("userId");
 			User user = userService.findById(userId);
 			
-			model.addAttribute("user", user);			 
+			model.addAttribute("user", user);
+			 
 			return "dashboard.jsp";
 		}
 		

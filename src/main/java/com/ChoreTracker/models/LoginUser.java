@@ -1,4 +1,4 @@
-package com.chore_tracker.models;
+package com.ChoreTracker.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

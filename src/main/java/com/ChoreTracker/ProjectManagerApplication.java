@@ -1,13 +1,13 @@
-package com.chore_tracker;
+package com.ChoreTracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ChoreTrackerApplication {
+public class ProjectManagerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ChoreTrackerApplication.class, args);
+		SpringApplication.run(ProjectManagerApplication.class, args);
 	}
 
 }

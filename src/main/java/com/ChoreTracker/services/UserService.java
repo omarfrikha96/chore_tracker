@@ -1,4 +1,4 @@
-package com.chore_tracker.services;
+package com.ChoreTracker.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import com.chore_tracker.models.LoginUser;
-import com.chore_tracker.models.User;
-import com.chore_tracker.repositories.UserRepository;
+import com.ChoreTracker.models.LoginUser;
+import com.ChoreTracker.models.User;
+import com.ChoreTracker.repositories.UserRepository;
 
 @Service
 public class UserService {

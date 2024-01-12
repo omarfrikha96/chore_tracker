@@ -1,9 +1,8 @@
-package com.chore_tracker.models;
+package com.ChoreTracker.models;
 
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -69,6 +68,13 @@ public class User {
 		this.updatedAt = new Date();
 	}
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "users_jobs", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "job_id"))
+	private List<Job> jobs;
+
+	@Column(updatable = false)
+	@OneToMany(mappedBy = "lead", fetch = FetchType.LAZY)
+	private List<Job> jobsLed;
 
 	public User() {
 	}
@@ -137,5 +143,20 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setProjects(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+
+	public List<Job> getJobsLed() {
+		return jobsLed;
+	}
+
+	public void setJobsLed(List<Job> jobsLed) {
+		this.jobsLed = jobsLed;
+	}
 
 }
