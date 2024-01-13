@@ -1,7 +1,5 @@
 package com.ChoreTracker.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ChoreTracker.models.Job;
 import com.ChoreTracker.models.User;
@@ -29,18 +26,44 @@ public class JobController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/jobs/new")
+	@GetMapping("/dashboard")
+	public String dashboard(HttpSession session, Model model, Job job) {
+	 
+		if(session.getAttribute("userId") == null) {
+			return "redirect:/logout";
+		}
+		model.addAttribute("jobs", jobService.all());
+    	model.addAttribute("user", userService.findById((Long)session.getAttribute("userId")));
+
+
+		return "dashboard.jsp";
+	}
+	
+    @GetMapping("/jobs/{id}/join")
+    public String borrowBook(@PathVariable("id") Long id, HttpSession session) {
+    	if(session.getAttribute("userId") == null) {
+    		return "redirect:/";
+    	}
+    	Job job = jobService.findById(id);
+    	job.setJoin(userService.findById((Long)session.getAttribute("userId")));
+    	jobService.update(job);
+    	
+    	return "redirect:/dashboard";
+    }
+    	
+
+	@GetMapping("/addJob")
 	public String newJob(@ModelAttribute("job") Job job, HttpSession session, Model model) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/logout";
 		}
-		Long userId = (Long) session.getAttribute("userId");
-
-		model.addAttribute("userId", userId);
+//		Long userId = (Long) session.getAttribute("userId");
+		User user = userService.findById((Long)session.getAttribute("userId"));
+		model.addAttribute("user", user);
 		return "new_job.jsp";
 	}
 
-	@PostMapping("/jobs/new")
+	@PostMapping("/addJob")
 	public String addNewJob(@Valid @ModelAttribute("job") Job job, BindingResult result, HttpSession session) {
 
 		if (session.getAttribute("userId") == null) {
@@ -54,14 +77,13 @@ public class JobController {
 
 			Long userId = (Long) session.getAttribute("userId");
 			User user = userService.findById(userId);
-			user.getJobs().add(job);
 			userService.updateUser(user);
 			return "redirect:/dashboard";
 		}
 	}
 
 
-	@GetMapping("/jobs/{id}")
+	@GetMapping("/view/{id}")
 	public String viewJob(@PathVariable("id") Long id, HttpSession session, Model model) {
 
 		if (session.getAttribute("userId") == null) {
@@ -73,7 +95,7 @@ public class JobController {
 		return "view_job.jsp";
 	}
 
-	@GetMapping("/jobs/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String openEditJob(@PathVariable("id") Long id, HttpSession session, Model model) {
 
 		if (session.getAttribute("userId") == null) {
@@ -85,7 +107,7 @@ public class JobController {
 		return "edit_job.jsp";
 	}
 
-	@PostMapping("/jobs/edit/{id}")
+	@PostMapping("/edit/{id}")
 	public String editJob(@PathVariable("id") Long id, @Valid @ModelAttribute("job") Job job, BindingResult result,
 			HttpSession session) {
 
@@ -99,10 +121,8 @@ public class JobController {
 		if (result.hasErrors()) {
 			return "edit_job.jsp";
 		} else {
-			Job thisJob = jobService.findById(id);
-			job.setUsers(thisJob.getUsers());
 			job.setLead(user);
-			jobService.updateJob(job);
+			jobService.update(job);
 			return "redirect:/dashboard";
 		}
 	}
