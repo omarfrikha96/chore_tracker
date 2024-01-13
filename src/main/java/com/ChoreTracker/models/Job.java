@@ -55,13 +55,13 @@ public class Job {
 		this.updatedAt = new Date();
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "job_id")
-	private User lead;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "users_jobs", joinColumns = @JoinColumn(name = "job_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> users;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User lead;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="join_id")
+    private User join;
 
 	public Job() {
 	}
@@ -114,6 +114,7 @@ public class Job {
 		this.updatedAt = updatedAt;
 	}
 
+
 	public User getLead() {
 		return lead;
 	}
@@ -122,13 +123,14 @@ public class Job {
 		this.lead = lead;
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public User getJoin() {
+		return join;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setJoin(User join) {
+		this.join = join;
 	}
+
 
 	
 

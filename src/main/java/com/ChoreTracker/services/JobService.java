@@ -18,15 +18,17 @@ public class JobService {
 	@Autowired
 	private UserService userService;
 	
-	public List<Job> allJobs(){
+	public List<Job> all(){
 		return jobRepo.findAll();
 	}
 	
-	public Job updateJob(Job job) {
+	public Job update(Job job) {
 		return jobRepo.save(job);
 	}
 	
-	
+
+
+
 	public Job addJob(Job job) {
 		return jobRepo.save(job);
 	}

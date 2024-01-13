@@ -59,19 +59,7 @@ public class LoginController {
 		    return "redirect:/dashboard";
 		}
 		
-		@GetMapping("/dashboard")
-		public String dashboard(HttpSession session, Model model) {
-		 
-			if(session.getAttribute("userId") == null) {
-				return "redirect:/logout";
-			}
-			Long userId = (Long) session.getAttribute("userId");
-			User user = userService.findById(userId);
-			
-			model.addAttribute("user", user);
-			 
-			return "dashboard.jsp";
-		}
+
 		
 
 		@GetMapping("/logout")

@@ -9,44 +9,53 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <title>Edit Job</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/main.css">
+<!-- change to match your file/naming structure -->
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<h2><a href="/dashboard">Dashboard</a></h2>
+<div class="container mt-4">
 
-<h1>Edit Job</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+<h2>Edit Your Job Posting</h2>
+<a href="/logout">Logout</a>
+</div>
 
-<form:form action="/jobs/edit/${job.id}" method="post" modelAttribute="job">
+
+<form:form action="/edit/${job.id}" method="post" modelAttribute="job">
 
 	<table>
 	    <thead>
 	    	<tr>
-	            <td class="float-left">Title:</td>
-	            <td class="float-left">
+	            <td class="form-label">Title:</td>
+	            <td>
 	            	<form:errors path="title" class="text-danger"/>
-					<form:input class="input" path="title" value="${job.title}"/>
+					<form:input class="form-control" path="title" value="${job.title}"/>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="float-left">Description:</td>
-	            <td class="float-left">
+	            <td class="form-label">Description:</td>
+	            <td >
 	            	<form:errors path="description" class="text-danger"/>
-					<form:textarea rows="4" class="input" path="description" value="${job.description}"/>
+					<form:textarea rows="4" class="form-control" path="description" value="${job.description}"/>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td class="float-left">Location:</td>
-	            <td class="float-left">
+	            <td class="form-label">Location:</td>
+	            <td>
 	            	<form:errors path="location" class="text-danger"/>
-					<form:input path="location" type="text" value="${job.location}"/>
+					<form:input class="form-control" path="location" type="text" value="${job.location}"/>
 	            </td>
 	        </tr>
-	        <tr>
-	        	<td><a class="linkBtn" href="/dashboard">Cancel</a></td>
-	        	<td><input class="input" type="submit" value="Submit"/></td>
+	        <tr class="mt-4">
+	        	<td><a class="btn btn-danger ms-1" href="/dashboard">Cancel</a></td>
+	        	<td><input class="btn btn-success ms-1" type="submit" value="Submit"/></td>
 	        </tr>
 	    </thead>
 	</table>
 </form:form>
+</div>
 </body>
 </html>

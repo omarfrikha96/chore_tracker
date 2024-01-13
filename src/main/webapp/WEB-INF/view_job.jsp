@@ -8,26 +8,37 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<title>Job Details</title>
+<title>View Job</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/main.css">
+<!-- change to match your file/naming structure -->
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-<a href="/dashboard">Back</a>
-<a href="/logout">Logout</a>
-</div>
+<div class="container mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4">
 <h2>${job.title}</h2>
+<div>
+<a href="/dashboard" class="ms-4">Back</a>
+<a href="/logout" class="ms-4">Logout</a>
+</div>
+</div>
 
 
-        <section>
+
+
+        <section class="border border-dark mb-4">
         <p>  ${job.description} </p>
-        <p> Location: ${job.location} </p>
-        <p> Posted by: ${job.lead.firstName} ${job.lead.lastName}</p>
-        <p> Posted on: ${job.createdAt}</p>
+        <p> <strong> Location: </strong> ${job.location} </p>
+        <p> <strong>Posted by: </strong> ${job.lead.firstName} ${job.lead.lastName}</p>
+        <p> <strong> Posted on:</strong> <fmt:formatDate value="${job.createdAt}" pattern="MMMM dd, yyyy" /></p>
         </section>
 
 
-<c:if test = "${job.lead.id==userId}">
-    <h2><a href="/jobs/delete/${job.id}">Delete Job</a></h2>
+<c:if test = "${user.id==job.join.id}">
+<a href="/jobs/${job.id}/join" class="btn btn-success ms-1">Add to My Jobs</a> 
 </c:if>
+</div>
 </body>
 </html>
